@@ -34,12 +34,22 @@ func startRepl(cfg *config) {
 		if exists {
 
 			if commandName == "explore" {
-				area := words[1]
-				cfg.areaName = &area
+				if  len(words) > 1 && len(words[1]) > 0  {
+					area := words[1]
+					cfg.areaName = &area
+				} else {
+					fmt.Println("Error: Please provide an area name")
+					continue
+				}
 			} else if commandName == "catch" {
-				pokemon := words[1]
-				cfg.pokemonName = &pokemon
-			}
+				if  len(words) > 1 && len(words[1]) > 0 {
+					pokemon := words[1]
+					cfg.pokemonName = &pokemon
+				} else {
+					fmt.Println("Error: Please provide a Pokemon name")
+					continue
+				}
+			} 
 
 			err := command.callback(cfg)
 			if err != nil {
